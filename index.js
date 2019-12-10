@@ -5,7 +5,8 @@ var methodOveride = require("method-override");
 var expressSanitizer = require("express-sanitizer");
 var app = express();
 
-mongoose.connect("mongodb://localhost/blog_app");
+var url = process.env.DATABASEURL || "mongodb://localhost/blog_app"
+mongoose.connect(url);
 
 app.set("view engine", "ejs"); 
 
@@ -121,7 +122,8 @@ app.delete("/blogs/:id", function(req,res){
 
 }); 
 
-app.listen(8081,function()  {
+var PORT = process.env.PORT || 3000;
+app.listen(PORT,function()  {
 
-    console.log("server is running");
+    console.log(`server is running on port ${PORT}`);
 });
